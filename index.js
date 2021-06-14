@@ -7,7 +7,11 @@ import cors from 'cors'; //cros origin resource sharing.
                         //which is normally prohibited because of SOP
 
 
+import postRoutes from './routes/posts.js';
+
 const app = express();
+
+app.use('/posts', postRoutes);
 
 app.use(express.urlencoded({extended : true}));
 app.use(express.json({ limit: "30mb", extended: true}));
