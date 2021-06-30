@@ -11,12 +11,12 @@ import postRoutes from './routes/posts.js';
 
 const app = express();
 
-app.use('/posts', postRoutes);
-
 app.use(express.urlencoded({extended : true}));
 app.use(express.json({ limit: "30mb", extended: true}));
-
 app.use(cors());
+
+
+app.use('/posts', postRoutes);
 
 //connecting to mongodb
 const CONNECTION_URL = 'mongodb+srv://mdmostafa:mdmostafa@nodejs-authentication.4tkhl.mongodb.net/test?retryWrites=true&w=majority';
