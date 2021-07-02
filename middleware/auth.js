@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 
 const auth = async (req, res, next) => {
      try {
+        //console.log(req.headers);
         const token = req.headers.authorization.split(" ")[1]; //this is to check if a user wants to like delete then if he is the one or nt
         const isCustomAuth = token.length < 500; //it is our own
 
@@ -19,7 +20,7 @@ const auth = async (req, res, next) => {
 
         next();
      } catch(error) {
-         console.log
+         console.log(error);
      }
 }
 

@@ -9,7 +9,7 @@ import cors from 'cors'; //cros origin resource sharing.
 
 
 import postRoutes from './routes/posts.js';
-import userRoutes from './routes/user.js';
+import userRouter from './routes/user.js';
 
 const app = express();
 dotenv.config();
@@ -20,7 +20,7 @@ app.use(cors());
 
 
 app.use('/posts', postRoutes);
-app.use('/user', userRoutes);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello to memories APP');
