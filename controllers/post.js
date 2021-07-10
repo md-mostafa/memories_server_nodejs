@@ -15,6 +15,26 @@ export const getPosts = async (req, res) => {
     //res.send('Akash is the best');
 }
 
+//query -> /posts?page=1 -> page = 1        //this is for search
+//params -> /posts/123 -> id = 123          //this is for specific
+export const getPostsBySearch = async (req, res) => {
+
+    const { searchQuery, tags } = req.query;
+
+    try{
+        const title = new RegExp(searchQuery, 'i'); //i = ignore case
+        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') }}] });
+        //find me all the posts that mactch one of those two criteria
+        //first one is the title
+        //second one is tags
+        //is one of the tags in the array of tags equal to tags 
+
+        res.json({ data: posts });
+    }catch(error){
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const createPost = async (req, res) => {
     const post = req.body;
     
@@ -50,7 +70,7 @@ export const deletePost = async (req, res) => {
 
     await PostMessage.findByIdAndRemove(id);
 
-    console.log('DELETE');//to debugg
+    //console.log('DELETE');//to debugg
 
     res.json({ message: 'Post deleted Successfully!!' });
 }
